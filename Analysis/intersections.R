@@ -21,9 +21,15 @@ blocks_2020 <- sf::read_sf("https://drive.google.com/uc?export=download&id=1kE2t
 
 #Lots
 ###First download from Google Drive and then access from Downloads
-lots_2000 <- sf::read_sf("C:/Users/brenner/Downloads/pluto2005.gpkg")
-lots_2010 <- sf::read_sf("C:/Users/brenner/Downloads/pluto2015.gpkg")
-lots_2020 <- sf::read_sf("C:/Users/brenner/Downloads/pluto2025.gpkg")
+lots_2000 <- 
+  sf::read_sf("C:/Users/brenner/Downloads/pluto2005.gpkg") %>% 
+  dplyr::mutate(bbl = as.character(bbl))
+  
+lots_2010 <- sf::read_sf("C:/Users/brenner/Downloads/pluto2015.gpkg") %>% 
+  dplyr::mutate(bbl = as.character(bbl))
+
+lots_2020 <- sf::read_sf("C:/Users/brenner/Downloads/pluto2025.gpkg") %>% 
+  dplyr::mutate(bbl = as.character(bbl))
 
 # First Level Functions ---------------------------------------------------
 #Function 1: Clips a borough-level floodplain shapefile to a specific Census tract
