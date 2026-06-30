@@ -250,3 +250,72 @@ fp_2080_vin_2020 <-
     lot_shp   = lots_2020
   )
 
+fp_2020_vin_2000 %>% 
+  dplyr::transmute(
+    level,
+    geo_id,
+    vintage,
+    flood = 2020,
+    tract, 
+    block, 
+    area_total,
+    flood_area,
+    flood_share
+  ) %>% 
+  dplyr::bind_rows(
+    fp_2020_vin_2010 %>% 
+      dplyr::transmute(
+        level,
+        geo_id,
+        vintage,
+        flood = 2020,
+        tract, 
+        block, 
+        area_total,
+        flood_area,
+        flood_share
+      )
+  ) %>% 
+  dplyr::bind_rows(
+    fp_2020_vin_2020 %>% 
+      dplyr::transmute(
+        level,
+        geo_id,
+        vintage,
+        flood = 2020,
+        tract, 
+        block, 
+        area_total,
+        flood_area,
+        flood_share
+      )
+  ) %>% 
+  dplyr::bind_rows(
+    fp_2050_vin_2020 %>% 
+      dplyr::transmute(
+        level,
+        geo_id,
+        vintage,
+        flood = 2050,
+        tract, 
+        block, 
+        area_total,
+        flood_area,
+        flood_share
+      )
+  ) %>% 
+  dplyr::bind_rows(
+    fp_2080_vin_2020 %>% 
+      dplyr::transmute(
+        level,
+        geo_id,
+        vintage,
+        flood = 2080,
+        tract, 
+        block, 
+        area_total,
+        flood_area,
+        flood_share
+      )
+  ) %>% 
+  readr::write_csv(stringr::str_glue("intersection-results_{Sys.Date()}.csv"))
